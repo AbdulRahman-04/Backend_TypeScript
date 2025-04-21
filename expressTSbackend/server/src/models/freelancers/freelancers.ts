@@ -10,7 +10,15 @@ interface IFreelancer extends Document{
     skillsMasteredAt: string,
     experience: string,
     profilePhoto: string,
-    portfolio?: string
+    portfolio?: string,
+    flVerified: {
+        email: boolean | null,
+        phone: boolean | null
+    },
+    flVerifyToken: {
+        email: string | null,
+        phone: string | null
+    }
 }
 
 const flSchema = new Schema<IFreelancer>({
@@ -46,6 +54,24 @@ const flSchema = new Schema<IFreelancer>({
     },
     profilePhoto: {
         type: String
+    },
+    flVerified: {
+        email: {
+            type: Boolean,
+            default: false
+        },
+        phone: {
+            type: Boolean,
+            default: false
+        }
+    },
+    flVerifyToken: {
+        email: {
+            type: String 
+        },
+        phone: {
+            type: String
+        }
     }
 })
 
