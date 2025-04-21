@@ -1,0 +1,14 @@
+Setup for practicing TypeScript: 
+
+-> intall Node.js
+-> Install TypeScript Compiler : 
+   . Go to terminal
+   . npm i -g typescript, npm i ts-node
+   . extension to be downloaded (eslint, prettier eslint, material icon theme, js and ts nightly)
+
+-> tsc --watch 1.ts/2.ts   
+
+To run a ts-file in console: 
+
+-> tsc --wtach filename
+-> ts-node filename.js 
