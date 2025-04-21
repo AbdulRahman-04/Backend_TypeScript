@@ -1,4 +1,4 @@
 {
-    "PORT": 5030,
-    "DB_URL": "mongodb+srv://abdrahman:abdrahman@rahmann18.hy9zl.mongodb.net/ts_Backend_practice"
+    "PORT": 5019,
+    "DB_URL": "mongodb+srv://abdrahman:abdrahman@rahmann18.hy9zl.mongodb.net/tsBACKEND"
 }

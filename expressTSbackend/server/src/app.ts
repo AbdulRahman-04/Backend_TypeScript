@@ -1,26 +1,22 @@
-import express, {Request, Response, Application} from "express"
+import express , {Request, Response , Application} from "express"
 import { StatusCodes } from "http-status-codes";
 import config from "config"
-// DATABASE IMPORT 
+// DB IMPORT
 import "./utils/dbConnect"
 
 
 const app: Application = express();
 const PORT: string = config.get<string>("PORT");
 
-app.use(express.json())
-
 app.get("/", (req: Request, res: Response)=>{
     try {
-        res.status(StatusCodes.OK).json({msg: "Hello world"})
+        res.status(StatusCodes.OK).json({msg: "HELLO WORLD✨"})
     } catch (error) {
         console.log(error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: error})
     }
 })
 
-
 app.listen(Number(PORT), ()=>{
-    console.log(`your web app is running live at port ${PORT}`);
-    
+    console.log(`YOUR SERVER IS RUNNING AT ${PORT}`);
 })
