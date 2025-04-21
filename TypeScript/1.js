@@ -72,11 +72,11 @@ console.log(ab, typeof ab);
 var n = "rahman";
 n = 48;
 console.log(n, typeof n);
-// void: void is used for functions that do not return a value.
-// function meraFunction(): void{
-//     console.log("hello world");
-// }
-// Never: never is used for functions that never return—either they throw errors or run forever.
-// function throwError(): never {
-//     throw new Error("This function never returns!");
-//   }
+var myUser = {
+    username: "hey",
+    age: 49,
+    isalive: true
+};
+console.log(myUser, typeof myUser);
+var myUser1 = 50;
+console.log(myUser1);

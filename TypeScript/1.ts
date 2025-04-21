@@ -127,3 +127,40 @@ console.log(n, typeof n);
 // function throwError(): never {
 //     throw new Error("This function never returns!");
 //   }
+
+
+// Type interference and Type annotations: 
+
+// Type interference: declaring a variable in ts without defing its Type.
+
+// Type annotations: declaring a variable in ts while defining its Type
+
+// Interfaces and type aliases: 
+
+// Interfaces: interfaces in ts are like a rulebook which defines teh shape of an object (e.g: mainly used for schemas) it tells before decalring the
+//             object, how it'll look and what type of properties it'll have.
+
+
+interface user {
+    username: string,
+    age: number,
+    isalive: boolean,
+}
+
+let myUser: user = {
+    username: "hey",
+    age: 49,
+    isalive: true
+}
+
+console.log(myUser, typeof myUser);
+
+
+// Type Aliases: Type aliases in TypeScript are used for creating own custom names for our types. they make code more readable and reusable by
+//               simplifying complex or repetetive types.
+
+type rahman = string | number | null;
+
+let myUser1: rahman =  50;
+console.log(myUser1);
+
