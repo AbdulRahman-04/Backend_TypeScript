@@ -1,0 +1,21 @@
+Here's the notes to set up ur ts folder structure for Backend in TypeScript:
+
+-> cd FolderName
+-> npm init -y && tsc --init 
+-> touch .gitignore nodemon.json && mkdir src
+-> inside nodemon.json paste the below code : 
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "exec": "ts-node src/app.ts
+}
+-> go to package.json file and add these 3 lines inside scripts:
+
+"dev": "nodemon src/app.ts",
+"build":"tsc",
+"start" : "node dist/app.js"
+
+-> mkdir src && mkdir config && cd config && touch default.json (for sensitive data)
+
+-> inside src folder we'll have all our folder and main file(app.ts) 
+contollers, middleware, app.ts, utils, models, uploads etc
