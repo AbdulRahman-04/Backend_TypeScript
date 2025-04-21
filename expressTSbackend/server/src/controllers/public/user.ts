@@ -62,7 +62,7 @@ router.post("/usersignup", async (req: Request, res: Response): Promise<void>=>{
             from: USER,
             to: email,
             subject: "Verification Link",
-             text: `${URL}/api/public/emailverify/${emailToken}`
+             text: `${URL}/api/user/emailverify/${emailToken}`
         }
 
          await sendEmail(emailData)
@@ -78,7 +78,7 @@ router.post("/usersignup", async (req: Request, res: Response): Promise<void>=>{
         // await sendSMS(smsData);
 
 
-        console.log(`${URL}/api/public/emailverify/${emailToken}`);
+        console.log(`${URL}/api/user/emailverify/${emailToken}`);
         // console.log(`${URL}/api/public/phoneverify/${phoneToken}`);
         
         res.status(200).json({msg: "You'll be registered as our new user, once u verify your email🙌"})
@@ -127,41 +127,41 @@ router.get("/emailverify/:token", async (req: Request, res: Response): Promise<v
     }
 })
 
-router.get("/phoneverify/:token", async (req: Request, res: Response): Promise<void>=>{
-    try {
-        // take token from url
-        let token = req.params.token
+// router.get("/phoneverify/:token", async (req: Request, res: Response): Promise<void>=>{
+//     try {
+//         // take token from url
+//         let token = req.params.token
 
-        // compare token 
-        let user = await userModel.findOne({"userVerifyToken.phone": token});
-        if(!user){
-         res.status(StatusCodes.BAD_REQUEST).json({msg: "Invalid Token"})
-         return
-        }
+//         // compare token 
+//         let user = await userModel.findOne({"userVerifyToken.phone": token});
+//         if(!user){
+//          res.status(StatusCodes.BAD_REQUEST).json({msg: "Invalid Token"})
+//          return
+//         }
 
-        // check if user hasn't clicked the link more than once 
-        if(user.userVerified.phone === true){
-            res.status(StatusCodes.OK).json({msg: "User Phone Already Verified"})
-            return
-        }
+//         // check if user hasn't clicked the link more than once 
+//         if(user.userVerified.phone === true){
+//             res.status(StatusCodes.OK).json({msg: "User Phone Already Verified"})
+//             return
+//         }
 
-        // make verified true and token null
-        if(user){
-            user.userVerified.phone = true;
-            user.userVerifyToken.phone = null;
+//         // make verified true and token null
+//         if(user){
+//             user.userVerified.phone = true;
+//             user.userVerifyToken.phone = null;
 
-            await user.save()
-        }
+//             await user.save()
+//         }
 
-        res.status(StatusCodes.OK).json({msg: "User Phone Verified Successfully!✅"})
+//         res.status(StatusCodes.OK).json({msg: "User Phone Verified Successfully!✅"})
         
-    } catch (error) {
-        if(error instanceof Error){
-            console.log(error.message);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: error})
-        }
-    }
-})
+//     } catch (error) {
+//         if(error instanceof Error){
+//             console.log(error.message);
+//         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: error})
+//         }
+//     }
+// })
 
 router.post("/usersignin", async (req: Request, res: Response): Promise<void>=>{
     try {
@@ -241,3 +241,5 @@ router.post("/resetpassword", async (req: Request, res: Response): Promise<void>
         }
     }
 });
+
+export default router

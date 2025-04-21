@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import config from "config";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
+// import sendSMS from "../../utils/sendSMS";
 import sendEmail from "../../utils/sendEmail";
 import flModel from "../../models/freelancers/freelancers";
 import crypto from "crypto";
@@ -54,12 +55,12 @@ router.post("/flsignup", async (req: Request, res: Response): Promise<void> => {
             from: USER,
             to: email,
             subject: "Verification Link",
-            text: `${URL}/api/public/emailverify/${emailToken}`
+            text: `${URL}/api/fl/emailverify/${emailToken}`
         };
 
         await sendEmail(emailData);
 
-        console.log(`${URL}/api/public/emailverify/${emailToken}`);
+        console.log(`${URL}/api/fl/emailverify/${emailToken}`);
 
         res.status(StatusCodes.OK).json({ msg: "Freelancer registered! Verify your email to continue 🙌" });
     } catch (error) {
@@ -106,45 +107,45 @@ router.get("/emailverify/:token", async (req: Request, res: Response): Promise<v
     }
 })
 
-router.get("/phoneverify/:token", async (req: Request, res: Response): Promise<void>=>{
-    try {
-        // take token from url
-        let token = req.params.token
+// router.get("/phoneverify/:token", async (req: Request, res: Response): Promise<void>=>{
+//     try {
+//         // take token from url
+//         let token = req.params.token
 
-        // compare token 
-        let fl = await flModel.findOne({"flVerifyToken.phone": token});
-        if(!fl){
-         res.status(StatusCodes.BAD_REQUEST).json({msg: "Invalid Token"})
-         return
-        }
+//         // compare token 
+//         let fl = await flModel.findOne({"flVerifyToken.phone": token});
+//         if(!fl){
+//          res.status(StatusCodes.BAD_REQUEST).json({msg: "Invalid Token"})
+//          return
+//         }
 
-        // check if user hasn't clicked the link more than once 
-        if(fl.flVerified.phone === true){
-            res.status(StatusCodes.OK).json({msg: "fla Phone Already Verified"})
-            return
-        }
+//         // check if user hasn't clicked the link more than once 
+//         if(fl.flVerified.phone === true){
+//             res.status(StatusCodes.OK).json({msg: "fla Phone Already Verified"})
+//             return
+//         }
 
-        // make verified true and token null
-        if(fl){
-            fl.flVerified.phone = true;
-            fl.flVerifyToken.phone = null;
+//         // make verified true and token null
+//         if(fl){
+//             fl.flVerified.phone = true;
+//             fl.flVerifyToken.phone = null;
 
-            await fl.save()
-        }
+//             await fl.save()
+//         }
 
-        res.status(StatusCodes.OK).json({msg: "User Phone Verified Successfully!✅"})
+//         res.status(StatusCodes.OK).json({msg: "User Phone Verified Successfully!✅"})
         
-    } catch (error) {
-        if(error instanceof Error){
-            console.log(error.message);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: error})
-        }
-    }
-})
+//     } catch (error) {
+//         if(error instanceof Error){
+//             console.log(error.message);
+//         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: error})
+//         }
+//     }
+// })
 
 
 // Freelancer Login
-router.post("/fllogin", async (req: Request, res: Response): Promise<void> => {
+router.post("/flsignin", async (req: Request, res: Response): Promise<void> => {
     try {
         let { email, password } = req.body;
 
@@ -210,3 +211,5 @@ router.post("/flresetpassword", async (req: Request, res: Response): Promise<voi
         }
     }
 });
+
+export default router

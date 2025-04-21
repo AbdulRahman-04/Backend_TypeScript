@@ -26,7 +26,7 @@ const flSchema = new Schema<IFreelancer>({
        type: String,
        required: true,
        maxlength: 50,
-       minlength: 10
+
     },
     email: {
         type: String,
