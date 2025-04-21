@@ -164,3 +164,34 @@ type rahman = string | number | null;
 let myUser1: rahman =  50;
 console.log(myUser1);
 
+
+// Union and intersection types: 
+
+// Union Types: the OR ( | ) operator from JavaScript is calledd in ts as Union type.
+   
+type meraType = string | boolean
+
+let myValue: meraType = true;
+console.log(myValue);
+
+
+// intersection : Intersection type (&) in TypeScript combines multiple types, meaning an object must have all properties from the previous types.
+
+type User = {
+    username: string,
+    email: string
+}
+
+type Admin = User & {
+    password: string,
+    age: number
+}
+
+let Input : Admin = {
+    username: "rahman",
+    email: "rahman69@gmail.com",
+    password: "123458",
+    age: 20
+}
+
+console.log(Input, typeof Input);

@@ -80,3 +80,12 @@ var myUser = {
 console.log(myUser, typeof myUser);
 var myUser1 = 50;
 console.log(myUser1);
+var myValue = true;
+console.log(myValue);
+var Input = {
+    username: "rahman",
+    email: "rahman69@gmail.com",
+    password: "123458",
+    age: 20
+};
+console.log(Input, typeof Input);
